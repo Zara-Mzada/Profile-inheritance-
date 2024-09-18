@@ -1,0 +1,14 @@
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/bin/Debug/net8.0/UserInheritance
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/bin/Debug/net8.0/UserInheritance.deps.json
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/bin/Debug/net8.0/UserInheritance.runtimeconfig.json
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/bin/Debug/net8.0/UserInheritance.dll
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/bin/Debug/net8.0/UserInheritance.pdb
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/UserInheritance.GeneratedMSBuildEditorConfig.editorconfig
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/UserInheritance.AssemblyInfoInputs.cache
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/UserInheritance.AssemblyInfo.cs
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/UserInheritance.csproj.CoreCompileInputs.cache
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/UserInheritance.dll
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/refint/UserInheritance.dll
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/UserInheritance.pdb
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/UserInheritance.genruntimeconfig.cache
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/ref/UserInheritance.dll
