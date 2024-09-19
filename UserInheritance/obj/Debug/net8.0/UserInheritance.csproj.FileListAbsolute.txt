@@ -12,3 +12,4 @@
 /Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/UserInheritance.pdb
 /Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/UserInheritance.genruntimeconfig.cache
 /Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/ref/UserInheritance.dll
+/Users/zara/RiderProjects/UserInheritance/UserInheritance/obj/Debug/net8.0/UserInheritance.sourcelink.json

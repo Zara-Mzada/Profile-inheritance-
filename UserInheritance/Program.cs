@@ -5,23 +5,23 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        ProfileController profileController = new ProfileController();
-        
-        Admin admin1 = new Admin("Zahra", "Malikzada", 12,  "zahra@gmail.com", "1234", UserRole.Admin);
+        UserController userController = new UserController();
+        AdminController adminController = new AdminController();
+
+        Admin admin1 = new Admin("Zahra", "Malikzada", 12, "zahra@gmail.com", "1234", UserRole.Admin);
         User user1 = new User("Mirvari", "Muradova", 10, "mirvari@gmail.com", "1234m", UserRole.User);
         User user2 = new User("Farid", "Hasanov", 20, "farid@gmail.com", "f123", UserRole.User);
 
-        
-        profileController.AddProfile(admin1);
-        profileController.AddProfile(user1);
-        profileController.AddProfile(user2);
+        adminController.AddAdmin(admin1);
+        userController.AddUser(user1);
+        userController.AddUser(user2);
 
-        
+
         ReEnter:
         Console.Write("Welcome! Choose variant: \n" +
-                          "1. Sign Up\n" +
-                          "2. Sign In\n" +
-                          "Enter your choice: ");
+                      "1. Sign Up\n" +
+                      "2. Sign In\n" +
+                      "Enter your choice: ");
         var userChoice = Console.ReadLine();
 
         if (int.TryParse(userChoice, out int res))
@@ -54,7 +54,7 @@ public class Program
                     {
                         Console.WriteLine("It is not a number! Enter again");
                     }
-                    
+
                     Console.Write("Enter your email: ");
                     string email = Console.ReadLine();
 
@@ -80,8 +80,8 @@ public class Program
 
                     User user = new User(name, surname, age, email, password, userRole);
 
-                    profileController.SignUp(user);
-                    profileController.ShowAllProfiles();
+                    userController.SignUp(user);
+                    userController.ShowProfiles();
                 }
                 else if (roleChoice == "A")
                 {
@@ -104,7 +104,7 @@ public class Program
                     {
                         Console.WriteLine("It is not a number! Enter again");
                     }
-                    
+
                     Console.Write("Enter your email: ");
                     string email = Console.ReadLine();
 
@@ -130,8 +130,8 @@ public class Program
 
                     Admin admin = new Admin(name, surname, age, email, password, userRole);
 
-                    profileController.SignUp(admin);
-                    profileController.ShowAllProfiles();
+                    adminController.SignUp(admin);
+                    adminController.ShowProfiles();
                 }
                 else
                 {
@@ -142,126 +142,83 @@ public class Program
             else if (choice == 2)
             {
                 ReSign:
-                Console.Write("Enter your email: ");
-                string email = Console.ReadLine();
+                Console.WriteLine("What is your role: User or Admin (U/A)? ");
+                string role = Console.ReadLine();
 
-                Console.Write("Enter your password: ");
-                string password = Console.ReadLine();
-                
-                bool isSigntrue = profileController.SignIn(email, password);
-
-                if (isSigntrue)
+                if (role == "U")
                 {
-                    bool answer = profileController.CheckingRole(email, password);
-                    if (answer)
+                    Console.Clear();
+                    Console.Write("Enter your email: ");
+                    string email = Console.ReadLine();
+
+                    Console.Write("Enter your password: ");
+                    string password = Console.ReadLine();
+
+                    bool isSigntrue = userController.SignIn(email, password);
+                    
+                    if (isSigntrue)
                     {
-                        ReChoice:
-                        Console.Write("What to do? Choose: \n" +
-                                      "1. Show profiles \n" +
-                                      "2. Add profile\n" +
-                                      "Enter your choice: ");
-                        var signChoice = Console.ReadLine();
-                        int b;
-                        bool checkSign = int.TryParse(signChoice, out b);
-                        int adminChoice = 0;
-                        if (checkSign)
+                        foreach (User user in userController.Users)
                         {
-                            adminChoice = Convert.ToInt32(signChoice);
-                            if (adminChoice == 1)
+                            if(user.Email == email && user.Password == password)
                             {
-                                profileController.ShowAllProfiles();
+                               Console.WriteLine($"Name: {user.Name}\n" +
+                                                 $"Surname: {user.Surname}\n" +
+                                                 $"Age: {user.Age}\n" +
+                                                 $"Email: {user.Email}" +
+                                                 $"Password: {user.Password}\n" +
+                                                 $"Role: {UserRole.User}"); 
                             }
-                            else if (adminChoice == 2)
-                            {
-                                Console.Write("Enter name: ");
-                                string name = Console.ReadLine();
-
-                                Console.Write("Enter surname: ");
-                                string surname = Console.ReadLine();
-
-                                ReAge:
-                                Console.Write("Enter age: ");
-                                var enteredAge = Console.ReadLine();
-                                int c;
-                                bool checkAge = int.TryParse(enteredAge, out c);
-                                int age = 0;
-                                if (checkAge)
-                                {
-                                    age = Convert.ToInt32(enteredAge);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("It is not integer! Enter again");
-                                    goto ReAge;
-                                }
-
-                                Console.Write("Enter email: ");
-                                string adminEnteredEmail = Console.ReadLine();
-
-                                Console.Write("Enter password: ");
-                                string adminEnteredPassword = Console.ReadLine();
-                                
-                                ReEnterRole:
-                                Console.WriteLine("Which role do you want to create: User or Admin (U/A): ");
-                                string adminAnswer = Console.ReadLine();
-                                UserRole userRole;
-                                if (adminAnswer == "U")
-                                {
-                                    Profile user = new User(name, surname, age, adminEnteredEmail, adminEnteredPassword,
-                                        UserRole.User);
-                                    profileController.AddProfile(user);
-                                    profileController.ShowAllProfiles();
-                                }
-                                else if (adminAnswer == "A")
-                                {
-                                    Profile admin = new Admin(name, surname, age, adminEnteredEmail, adminEnteredPassword,
-                                        UserRole.Admin);
-                                    profileController.AddProfile(admin);
-                                    profileController.ShowAllProfiles();
-                                }
-                                else
-                                {
-                                    Console.WriteLine("There is not this variant! Enter again");
-                                    goto ReEnterRole;
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("There is not this variant! Enter again");
-                                goto ReChoice;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("It is not inteter number! Enter again");
-                            goto ReChoice;
+                            
                         }
                     }
                     else
                     {
-                        foreach (Profile profile in profileController.Profiles)
+                        Console.Clear();
+                        Console.WriteLine("Your role is not a user! Enter again");
+                        goto ReSign;
+                    }
+                }
+                else if (role == "A")
+                {
+                    Console.Clear();
+                    Console.Write("Enter your email: ");
+                    string email = Console.ReadLine();
+
+                    Console.Write("Enter your password: ");
+                    string password = Console.ReadLine();
+
+                    bool isSigntrue = adminController.SignIn(email, password);
+                    if (isSigntrue)
+                    {
+                        foreach (Admin admin in adminController.Admins)
                         {
-                            if (profile.Email == email && profile.Password == password && profile is User user)
+                            if (admin.Email == email && admin.Password == password)
                             {
-                                Console.WriteLine($"Name: {user.Name}\n" +
-                                                  $"Surname: {user.Surname}\n" +
-                                                  $"Age: {user.Age}");
+                                Console.WriteLine($"Name: {admin.Name}\n" +
+                                                  $"Surname: {admin.Surname}\n" +
+                                                  $"Age: {admin.Age}\n" +
+                                                  $"Email: {admin.Email}\n" +
+                                                  $"Password: {admin.Password}\n" +
+                                                  $"Role: {UserRole.Admin}");
                             }
                         }
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Your role is not a admin! Enter again");
+                        goto ReSign;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Wrong email or password");
+                    Console.Clear();
+                    Console.WriteLine("There is not this role! Enter again");
                     goto ReSign;
                 }
             }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("There is not this variant! Enter again");
-                goto ReEnter;
-            }
+            goto ReEnter;
         }
         else
         {
