@@ -2,6 +2,10 @@ using System.Collections;
 
 namespace UserInheritance;
 
+// ================================================================================================
+// PROFILE CONTROLLER ISLETMEMISEM, SADECE O DEFEDEN QALIB VE FUNCTIONLARI RAHAT YAZMAQCUN SILMEDIM
+// ================================================================================================
+
 public class ProfileController
 {
     public ArrayList Profiles { get; set; }
