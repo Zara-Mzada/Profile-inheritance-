@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using UserInheritance;
 
 public class Program
@@ -16,7 +17,12 @@ public class Program
         userController.AddUser(user1);
         userController.AddUser(user2);
 
-
+// ===================================================================================================================================
+        // Regexs
+        string regex = "^[A-Za-z]+$";
+        string emailRegex = @"^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$";
+        string notEmpty = @"\S+";
+        
         ReEnter:
         Console.Write("Welcome! Choose variant: \n" +
                       "1. Sign Up\n" +
@@ -35,12 +41,37 @@ public class Program
 
                 if (roleChoice == "U")
                 {
+                    ReName:
                     Console.Write("Enter your name: ");
                     string name = Console.ReadLine();
 
+                    if (Regex.IsMatch(name, regex))
+                    {
+                        goto Surname;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Wrong name type! Enter again");
+                        goto ReName;
+                    }
+                    
+                    Surname:
                     Console.Write("Enter your surname: ");
                     string surname = Console.ReadLine();
-
+                    
+                    if (Regex.IsMatch(surname, regex))
+                    {
+                        goto Age;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Wrong surname type! Enter again");
+                        goto Surname;
+                    }
+                    
+                    Age:
                     Console.Write("Enter your age: ");
                     var ageCon = Console.ReadLine();
                     int a;
@@ -52,12 +83,27 @@ public class Program
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("It is not a number! Enter again");
+                        goto Age;
                     }
 
+                    Email:
                     Console.Write("Enter your email: ");
                     string email = Console.ReadLine();
 
+                    if (Regex.IsMatch(email, emailRegex))
+                    {
+                        goto RePass;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("It is not an email! Enter again");
+                        goto Email;
+                    }
+                    
+                        
                     RePass:
                     Console.Write("Enter your password: ");
                     string Camepassword = Console.ReadLine();
@@ -66,13 +112,13 @@ public class Program
                     string CameconfirmPassword = Console.ReadLine();
 
                     string password;
-                    if (Camepassword == CameconfirmPassword)
+                    if (Camepassword == CameconfirmPassword && Regex.IsMatch(Camepassword, notEmpty))
                     {
                         password = Camepassword;
                     }
                     else
                     {
-                        Console.WriteLine("Password didn't match! Enter again");
+                        Console.WriteLine("Password didn't match or empty! Enter again");
                         goto RePass;
                     }
 
@@ -82,15 +128,41 @@ public class Program
 
                     userController.SignUp(user);
                     userController.ShowProfiles();
+                    goto ReEnter;
                 }
                 else if (roleChoice == "A")
                 {
+                    ReName:
                     Console.Write("Enter your name: ");
                     string name = Console.ReadLine();
 
+                    if (Regex.IsMatch(name, regex))
+                    {
+                        goto Surname;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Wrong name type! Enter again");
+                        goto ReName;
+                    }
+                    
+                    Surname:
                     Console.Write("Enter your surname: ");
                     string surname = Console.ReadLine();
-
+                    
+                    if (Regex.IsMatch(surname, regex))
+                    {
+                        goto Age;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Wrong surname type! Enter again");
+                        goto Surname;
+                    }
+                    
+                    Age:
                     Console.Write("Enter your age: ");
                     var ageCon = Console.ReadLine();
                     int a;
@@ -102,12 +174,27 @@ public class Program
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("It is not a number! Enter again");
+                        goto Age;
                     }
 
+                    Email:
                     Console.Write("Enter your email: ");
                     string email = Console.ReadLine();
 
+                    if (Regex.IsMatch(email, emailRegex))
+                    {
+                        goto RePass;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("It is not an email! Enter again");
+                        goto Email;
+                    }
+                    
+                        
                     RePass:
                     Console.Write("Enter your password: ");
                     string Camepassword = Console.ReadLine();
@@ -116,22 +203,23 @@ public class Program
                     string CameconfirmPassword = Console.ReadLine();
 
                     string password;
-                    if (Camepassword == CameconfirmPassword)
+                    if (Camepassword == CameconfirmPassword && Regex.IsMatch(Camepassword, notEmpty))
                     {
                         password = Camepassword;
                     }
                     else
                     {
-                        Console.WriteLine("Password didn't match! Enter again");
+                        Console.WriteLine("Password didn't match or empty! Enter again");
                         goto RePass;
                     }
 
-                    UserRole userRole = UserRole.Admin;
+                    UserRole userRole = UserRole.User;
 
-                    Admin admin = new Admin(name, surname, age, email, password, userRole);
+                    User user = new User(name, surname, age, email, password, userRole);
 
-                    adminController.SignUp(admin);
-                    adminController.ShowProfiles();
+                    userController.SignUp(user);
+                    userController.ShowProfiles();
+                    goto ReEnter;
                 }
                 else
                 {
