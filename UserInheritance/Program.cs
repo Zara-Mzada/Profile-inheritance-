@@ -22,6 +22,8 @@ public class Program
         string regex = "^[A-Za-z]+$";
         string emailRegex = @"^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$";
         string notEmpty = @"\S+";
+        string positive = @"^[0-9]+$";
+
         
         ReEnter:
         Console.Write("Welcome! Choose variant: \n" +
@@ -39,7 +41,7 @@ public class Program
                 Console.Write("Which role are you: User or Admin? Enter (U/A): ");
                 string roleChoice = Console.ReadLine();
 
-                if (roleChoice == "U")
+                if (roleChoice == "U" || roleChoice == "u")
                 {
                     ReName:
                     Console.Write("Enter your name: ");
@@ -77,7 +79,7 @@ public class Program
                     int a;
                     bool checkAge = int.TryParse(ageCon, out a);
                     int age = 0;
-                    if (checkAge)
+                    if (checkAge && Regex.IsMatch(ageCon, regex))
                     {
                         age = Convert.ToInt32(ageCon);
                     }
@@ -130,7 +132,7 @@ public class Program
                     userController.ShowProfiles();
                     goto ReEnter;
                 }
-                else if (roleChoice == "A")
+                else if (roleChoice == "A" || roleChoice == "a")
                 {
                     ReName:
                     Console.Write("Enter your name: ");
@@ -168,7 +170,7 @@ public class Program
                     int a;
                     bool checkAge = int.TryParse(ageCon, out a);
                     int age = 0;
-                    if (checkAge)
+                    if (checkAge && Regex.IsMatch(ageCon, positive))
                     {
                         age = Convert.ToInt32(ageCon);
                     }
@@ -233,7 +235,7 @@ public class Program
                 Console.WriteLine("What is your role: User or Admin (U/A)? ");
                 string role = Console.ReadLine();
 
-                if (role == "U")
+                if (role == "U" || role == "u")
                 {
                     Console.Clear();
                     Console.Write("Enter your email: ");
@@ -267,7 +269,7 @@ public class Program
                         goto ReSign;
                     }
                 }
-                else if (role == "A")
+                else if (role == "A" || role == "a")
                 {
                     Console.Clear();
                     Console.Write("Enter your email: ");
